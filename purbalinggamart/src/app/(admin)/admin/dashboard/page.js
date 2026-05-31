@@ -1,9 +1,11 @@
 "use client";
 
 import { useApp } from "@/app/(marketplace)/AppContext";
+
 export default function AdminDashboardPage() {
-  // Ambil data antrean dan fungsi setujui langsung dari global state
-  const { pendaftarUMKM, setujuiUMKM } = useApp(); 
+  // PENGAMAN DITAMBAHKAN DI SINI:
+  // Jika pendaftarUMKM atau setujuiUMKM belum ada di Context, berikan nilai default agar tidak crash
+  const { pendaftarUMKM = [], setujuiUMKM = () => {} } = useApp() || {}; 
 
   return (
     <div className="space-y-8 animate-fade-in">
@@ -80,7 +82,7 @@ export default function AdminDashboardPage() {
                     <td className="p-3 text-slate-400">{toko.tanggal}</td>
                     <td className="p-3 flex gap-2 justify-center">
                       <button 
-                        onClick={() => setujuiUMKM(toko.id)} // Menjalankan fungsi approval ke katalog utama
+                        onClick={() => setujuiUMKM(toko.id)} 
                         className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-[9px] uppercase tracking-wider px-3 py-1.5 transition-colors"
                       >
                         Setujui

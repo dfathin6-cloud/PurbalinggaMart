@@ -5,7 +5,9 @@ import { motion, AnimatePresence } from "motion/react";
 import { useApp } from "../AppContext.js"; 
 
 export default function DemoPage() {
-  const { dataUMKM, pendaftarUMKM, setujuiUMKM } = useApp(); 
+  // PENGAMAN DITAMBAHKAN DI SINI:
+  // Fallback array kosong [] ditambahkan agar .length dan .map tidak error saat build
+  const { dataUMKM = [], pendaftarUMKM = [], setujuiUMKM = () => {} } = useApp() || {}; 
 
   // State Halaman Utama
   const [activeCategory, setActiveCategory] = useState("MAKANAN & MINUMAN");
